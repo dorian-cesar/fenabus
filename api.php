@@ -1,5 +1,11 @@
 <?php
-require 'config.php';
+include 'config.php';
+
+if (!isset($pdo)) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Error de conexión a la base de datos']);
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
