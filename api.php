@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $rut = limpiarDatos($data['rut']);
+    $id_card=limpiarDatos($data['id_card']);
     $fechaEvento = limpiarDatos($data['fechaEvento']);
     $horaEvento = limpiarDatos($data['horaEvento']);
     $tipoEvento = limpiarDatos($data['tipoEvento']);
@@ -46,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Validar datos (puedes agregar más validaciones)
-    if (empty($rut) || empty($fechaEvento) || empty($horaEvento) || empty($tipoEvento) || empty($tipoTransaccion) || empty($lat) || empty($long) || empty($codAuth) || empty($correlativo)) {
+    if (empty($rut) || empty($id_card) || empty($fechaEvento) || empty($horaEvento) || empty($tipoEvento) || empty($tipoTransaccion) || empty($lat) || empty($long) || empty($codAuth) || empty($correlativo)) {
         http_response_code(400); // Bad Request
         echo json_encode(array("error" => "Todos los campos son obligatorios"));
         exit();
@@ -54,8 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Preparar la consulta SQL
     
-    $sql = "INSERT INTO eventos (rut, fechaEvento, horaEvento, tipoEvento, tipoTransaccion, lat, lng, codAuth, correlativo) 
-            VALUES ('$rut', '$fechaEvento', '$horaEvento', '$tipoEvento', '$tipoTransaccion', '$lat', '$long', '$codAuth', '$correlativo')";
+    $sql = "INSERT INTO eventos (rut,id_card, fechaEvento, horaEvento, tipoEvento, tipoTransaccion, lat, lng, codAuth, correlativo) 
+            VALUES ('$rut','$id_card', '$fechaEvento', '$horaEvento', '$tipoEvento', '$tipoTransaccion', '$lat', '$long', '$codAuth', '$correlativo')";
 
     if ($conn->query($sql) === TRUE) {
         http_response_code(201); // Created
