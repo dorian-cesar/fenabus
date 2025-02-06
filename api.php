@@ -1,8 +1,6 @@
 <?php
-$host = 'ls-8ce02ad0b7ea586d393e375c25caa3488acb80a5.cylsiewx0zgx.us-east-1.rds.amazonaws.com';
-$dbname = 'fenabus';
-$username = 'dbmasteruser';
-$password = ':&T``E~r:r!$1c6d:m143lzzvGJ$NuP;';
+header('Content-Type: application/json');
+include 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
